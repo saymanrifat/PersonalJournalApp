@@ -9,11 +9,17 @@ import Foundation
 
 struct DataService{
     
+    var publicNote: [Note] = []
+    
+//    func addPublicNotes(note: Note){
+//        publicNote.append(note)
+//    }
+    
     func getPublicNotes() -> [Note]{
         return [
-            Note(title: "First Note", image: "note-theme"),
-            Note(title: "Second Note", image: "note-theme"),
-            Note(title: "Third Note", image: "note-theme"),
+            Note(title: "First Note"),
+            Note(title: "Second Note"),
+            Note(title: "Third Note"),
         ]
     }
     

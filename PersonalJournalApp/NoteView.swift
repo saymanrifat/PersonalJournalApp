@@ -9,7 +9,6 @@ import SwiftUI
 
 struct NoteView: View {
     @Binding var title: String
-    @Binding var image: String
     @Binding var isNoteVisible: Bool
     var body: some View {
         VStack(){
@@ -23,7 +22,7 @@ struct NoteView: View {
                 
             }
             
-            Image(image)
+            Image("note-theme")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Text(title)
@@ -32,5 +31,5 @@ struct NoteView: View {
 }
 
 #Preview {
-    NoteView(title: Binding.constant("Test Title"), image: Binding.constant("note-theme"), isNoteVisible: Binding.constant(true))
+    NoteView(title: Binding.constant("Test Title"), isNoteVisible: Binding.constant(true))
 }

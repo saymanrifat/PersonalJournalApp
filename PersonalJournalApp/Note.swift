@@ -10,5 +10,4 @@ import Foundation
 struct Note: Identifiable{
     var id: UUID = UUID()
     var title: String
-    var image: String
 }

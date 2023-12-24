@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var privateNoteData:[Note] = []
-    @State var publicNoteData:[Note] = []
+    @Binding var publicNoteData:[Note]
+    @Binding var privateNoteData:[Note]
+    @Binding var isPrivate: Bool
     @State var isNoteVisible: Bool = false
     
     @State var selectedTitle: String = ""
@@ -26,13 +27,13 @@ struct HomeView: View {
                         GridItem(spacing: 20),
                         GridItem(spacing: 20)
                     ]){
-                        ForEach(publicNoteData){ note in
-                            NoteListItemView(title: note.title, image: note.image)
+                        ForEach(isPrivate ? privateNoteData: publicNoteData){ note in
+                            NoteListItemView(title: note.title)
                                 .onTapGesture {
                                     isNoteVisible = true
                                     
                                     selectedTitle = note.title
-                                    selectedImage = note.image
+                                    
                                     
                                 }
                         }
@@ -41,13 +42,13 @@ struct HomeView: View {
             }.padding(20)
             
         }.onAppear(){
-            publicNoteData = dataService.getPublicNotes()
+//            publicNoteData = dataService.getPublicNotes()
         }.sheet(isPresented: $isNoteVisible){
-            NoteView(title: $selectedTitle, image: $selectedImage, isNoteVisible: $isNoteVisible)
+            NoteView(title: $selectedTitle,isNoteVisible: $isNoteVisible)
         }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(publicNoteData: Binding.constant([]), privateNoteData: Binding.constant([]), isPrivate: Binding.constant(false))
 }

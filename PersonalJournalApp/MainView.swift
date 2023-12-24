@@ -1,20 +1,28 @@
 import SwiftUI
 
 struct MainView: View {
+    @State var privateNoteData:[Note] = []
+    @State var publicNoteData:[Note] = []
     @State var isAddNewNoteClicked: Bool = false
+    
+    @State var isPrivate: Bool = false
     var body: some View {
         
         ZStack(alignment: .bottomTrailing){
             TabView {
                 
-                HomeView().tabItem {
+                HomeView(
+                    publicNoteData: $publicNoteData,
+                    privateNoteData:  $privateNoteData,
+                    isPrivate: $isPrivate
+                ).tabItem {
                     VStack{
                         Image(systemName: "house.fill")
                         Text("Home")
                     }
                 }
                 
-                SettingsView().tabItem {
+                SettingsView(isPrivate: $isPrivate).tabItem {
                     VStack{
                         Image(systemName: "gearshape.fill")
                         Text("Settings")
@@ -23,9 +31,7 @@ struct MainView: View {
             }
             
             Button {
-                
                 isAddNewNoteClicked = true
-                
             } label: {
                 Image(systemName: "plus")
                     .font(.title.weight(.semibold))
@@ -39,7 +45,12 @@ struct MainView: View {
             .padding(.bottom, 70)
             .padding(.trailing, 20)
             .sheet(isPresented: $isAddNewNoteClicked){
-                AddNewNoteSheet()
+                AddNewNoteSheet(
+                    publicNoteData: $publicNoteData,
+                    privateNoteData:  $privateNoteData,
+                    isAddNewNoteClicked: $isAddNewNoteClicked,
+                    isPrivate: $isPrivate
+                )
                     .presentationDetents([.medium])
             }
             

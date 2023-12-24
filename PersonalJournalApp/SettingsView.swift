@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Binding var isPrivate: Bool
     var body: some View {
-        Text("Settings")
+        VStack(alignment: .leading){
+            Text("Settings")
+                .font(.largeTitle)
+            
+            Toggle(isOn: $isPrivate) {
+                Text("Turn on Private Mode")
+            }
+            Spacer()
+        }.padding()
     }
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(isPrivate: Binding.constant(false))
 }

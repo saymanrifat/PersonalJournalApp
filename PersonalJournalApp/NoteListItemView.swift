@@ -9,10 +9,9 @@ import SwiftUI
 
 struct NoteListItemView: View {
     var title: String
-    var image: String
     var body: some View {
         VStack{
-            Image(image)
+            Image("note-theme")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: 250, maxHeight: 400)
@@ -23,5 +22,5 @@ struct NoteListItemView: View {
 }
 
 #Preview {
-    NoteListItemView(title: "this one is test title", image: "note-theme")
+    NoteListItemView(title: "this one is test title")
 }
